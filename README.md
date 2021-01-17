@@ -2,53 +2,65 @@
 
 ## users テーブル
 
-| Column   | Type     | Options     |
-| -------- | -------- | ----------- |
-| nickname | string   | null: false |
-| email    | string   | null: false |
-| password | string   | null: false |
-| name     | string   | null: false |
-| birthday | datetime | null: false |
+| Column             | Type     | Options     |
+| ------------------ | -------- | ----------- |
+| nickname           | string   | null: false |
+| email              | string   | null: false |
+| encrypted_password | string   | null: false |
+| surname            | string   | null: false |
+| name               | string   | null: false |
+| surname_ruby       | string   | null: false |
+| name_ruby          | string   | null: false |
+| birthday           | date     | null: false |
 
 ### Association
 
 - has_many :items
-- has_many :purchases
+- has_many :purchases_domiciles
+- has_many :purchase_histories
 
 ## items テーブル
 
-| Column        | Type       | Options     |
-| ------------- | ---------- | ----------- |
-| product_name  | string     | null: false |
-| text          | text       | null: false |
-| category      | string     | null: false |
-| product_state | string     | null: false |
-| delivery_fee  | string     | null: false |
-| area          | string     | null: false |
-| day           | string     | null: false |
-| price         | integer    | null: false |
-| user          | references |             |
+| Column           | Type       | Options     |
+| ---------------- | ---------- | ----------- |
+| product_name     | string     | null: false |
+| text             | text       | null: false |
+| category_id      | integer    | null: false |
+| product_state_id | integer    | null: false |
+| delivery_fee_id  | integer    | null: false |
+| area_id          | integer    | null: false |
+| day_id           | integer    | null: false |
+| price            | integer    | null: false |
+| user             | references |             |
 
 ### Association
 
 - belongs_to :user
-- has_one    :purchase
+- has_one    :purchases_domicile
+- has_one    :purchase_history
 
-## purchases テーブル
+## purchases_domiciles テーブル
 
 | Column          | Type       | Options     |
 | --------------- | ---------- | ----------- |
-| card_number     | integer    | null: false |
-| expiration_date | integer    | null: false |
-| security_code   | integer    | null: false |
-| postal_code     | integer    | null: false |
+| postal_code     | string     | null: false |
 | prefectures     | string     | null: false |
 | municipality    | string     | null: false |
 | address         | string     | null: false |
 | building_name   | string     |             |
-| phone_number    | integer    | null: false |
+| phone_number    | string     | null: false |
 | user            | references |             |
 ### Association
+
+- belongs_to :item
+- belongs_to :user
+
+## purchase_histories テーブル
+| Column  | Type       | Options     |
+| ------- | ---------- | ----------- |
+| user_id | string     | null: false |
+| item_id | string     | null: false |
+| user    | references |             |
 
 - belongs_to :item
 - belongs_to :user
