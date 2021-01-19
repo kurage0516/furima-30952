@@ -39,18 +39,19 @@
 
 ## purchase_domiciles テーブル
 
-| Column          | Type       | Options           |
-| --------------- | ---------- | ----------------- |
-| postal_code     | string     | null: false       |
-| area_id         | integer    | null: false       |
-| municipality    | string     | null: false       |
-| address         | string     | null: false       |
-| building_name   | string     |                   |
-| phone_number    | string     | null: false       |
-| user            | references | foreign_key: true |
+| Column           | Type       | Options           |
+| ---------------- | ---------- | ----------------- |
+| postal_code      | string     | null: false       |
+| area_id          | integer    | null: false       |
+| municipality     | string     | null: false       |
+| address          | string     | null: false       |
+| building_name    | string     |                   |
+| phone_number     | string     | null: false       |
+| purchase_history | references | foreign_key: true |
+
 ### Association
 
-- has_one :purchase_histories
+- belongs_to :purchase_history
 
 ## purchase_histories テーブル
 | Column    | Type       | Options           |
@@ -60,4 +61,4 @@
 
 - belongs_to :item
 - belongs_to :user
-- belongs_to :purchase_domiciles
+- has_one    :purchase_domicile
