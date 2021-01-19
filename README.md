@@ -16,51 +16,48 @@
 ### Association
 
 - has_many :items
-- has_many :purchases_domiciles
 - has_many :purchase_histories
 
 ## items テーブル
 
-| Column           | Type       | Options     |
-| ---------------- | ---------- | ----------- |
-| product_name     | string     | null: false |
-| text             | text       | null: false |
-| category_id      | integer    | null: false |
-| product_state_id | integer    | null: false |
-| delivery_fee_id  | integer    | null: false |
-| area_id          | integer    | null: false |
-| day_id           | integer    | null: false |
-| price            | integer    | null: false |
-| user             | references |             |
+| Column           | Type       | Options           |
+| ---------------- | ---------- | ----------------- |
+| product_name     | string     | null: false       |
+| text             | text       | null: false       |
+| category_id      | integer    | null: false       |
+| product_state_id | integer    | null: false       |
+| delivery_fee_id  | integer    | null: false       |
+| area_id          | integer    | null: false       |
+| day_id           | integer    | null: false       |
+| price            | integer    | null: false       |
+| user             | references | foreign_key: true |
 
 ### Association
 
 - belongs_to :user
-- has_one    :purchases_domicile
 - has_one    :purchase_history
 
-## purchases_domiciles テーブル
+## purchase_domiciles テーブル
 
-| Column          | Type       | Options     |
-| --------------- | ---------- | ----------- |
-| postal_code     | string     | null: false |
-| prefectures     | string     | null: false |
-| municipality    | string     | null: false |
-| address         | string     | null: false |
-| building_name   | string     |             |
-| phone_number    | string     | null: false |
-| user            | references |             |
+| Column          | Type       | Options           |
+| --------------- | ---------- | ----------------- |
+| postal_code     | string     | null: false       |
+| area_id         | integer    | null: false       |
+| municipality    | string     | null: false       |
+| address         | string     | null: false       |
+| building_name   | string     |                   |
+| phone_number    | string     | null: false       |
+| user            | references | foreign_key: true |
 ### Association
 
-- belongs_to :item
-- belongs_to :user
+- has_one :purchase_histories
 
 ## purchase_histories テーブル
-| Column  | Type       | Options     |
-| ------- | ---------- | ----------- |
-| user_id | string     | null: false |
-| item_id | string     | null: false |
-| user    | references |             |
+| Column    | Type       | Options           |
+| --------- | ---------- | ----------------- |
+| user_id   | integer    | foreign_key: true |
+| item_id   | integer    | foreign_key: true |
 
 - belongs_to :item
 - belongs_to :user
+- belongs_to :purchase_domiciles
