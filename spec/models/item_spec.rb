@@ -81,5 +81,35 @@ RSpec.describe Item, type: :model do
       @item.valid?
       expect(@item.errors.full_messages).to include('Price is not a number')
     end
+
+    it 'category_idが1を選択されたら保存できないこと' do
+      @item.category_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Category must be greater than 1')
+    end
+
+    it 'product_state_idが1を選択されたら保存できないこと' do
+      @item.product_state_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Product state must be greater than 1')
+    end
+
+    it 'delivery_fee_idが1を選択されたら保存できないこと' do
+      @item.delivery_fee_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Delivery fee must be greater than 1')
+    end
+
+    it 'area_idが1を選択されたら保存できないこと' do
+      @item.area_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Area must be greater than 1')
+    end
+
+    it 'day_idが1を選択されたら保存できないこと' do
+      @item.day_id = 1
+      @item.valid?
+      expect(@item.errors.full_messages).to include('Day must be greater than 1')
+    end
   end
 end
