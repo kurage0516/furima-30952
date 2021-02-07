@@ -32,7 +32,7 @@
         <%# if @item.purchace_history.blank? %>
           <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
           <p class="or-text">or</p>
-          <%= link_to "削除", "#", method: :delete, class:"item-destroy" %>
+          <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
         <%# end %>
         <%# //購入履歴に関してのモデルを作成してから、購入履歴にあるものは編集、削除ができないように実装するため、コメントアウトにて残します。%>
       <%# elsif @item.purchace_history.blank? %>
