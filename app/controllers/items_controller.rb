@@ -21,15 +21,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    item_find
   end
 
   def edit
-    item_find
   end
 
   def update
-    item_find
     if @item.update(item_params)
       redirect_to item_path(@item.id), method: :get
     else
