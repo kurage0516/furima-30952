@@ -38,7 +38,7 @@
       <%# elsif @item.purchace_history.blank? %>
       <%# 購入履歴に関してのモデルを作成してから、購入履歴にあるものは購入履歴画面に進むボタンを押せないように実装するため、コメントアウトにて残します。%>
       <% else %>
-        <%= link_to "購入画面に進む", "#" ,class:"item-red-btn"%>
+        <%= link_to "購入画面に進む", item_purchase_histories_path(@item.id), class:"item-red-btn"%>
       <% end %>
     <% end %>
 
