@@ -10,11 +10,11 @@
       <%= image_tag @item.image, class:"item-box-img" %>
 
       <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <%# if @purchase_history.present? %>
-        <%# <div class="sold-out">
+      <% if @purchase_histories.blank? %>
+        <div class="sold-out">
           <span>Sold Out!!</span>
-        </div> %>
-      <%# end %>
+        </div>
+      <% end %>
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
     <div class="item-price-box">
@@ -28,16 +28,12 @@
 
     <% if user_signed_in? %>
       <% if current_user == @item.user %>
-        <%# 購入履歴に関してのモデルを作成してから、購入履歴にあるものは編集、削除ができないように実装するため、コメントアウトにて残します。%>
-        <%# if @item.purchace_history.blank? %>
+        <% if @purchase_histories.present? %>
           <%= link_to "商品の編集", edit_item_path, method: :get, class: "item-red-btn" %>
           <p class="or-text">or</p>
           <%= link_to "削除", item_path(@item.id), method: :delete, class:"item-destroy" %>
-        <%# end %>
-        <%# //購入履歴に関してのモデルを作成してから、購入履歴にあるものは編集、削除ができないように実装するため、コメントアウトにて残します。%>
-      <%# elsif @item.purchace_history.blank? %>
-      <%# 購入履歴に関してのモデルを作成してから、購入履歴にあるものは購入履歴画面に進むボタンを押せないように実装するため、コメントアウトにて残します。%>
-      <% else %>
+        <% end %>
+      <% elsif @purchase_histories.present? %>
         <%= link_to "購入画面に進む", item_purchase_histories_path(@item.id), class:"item-red-btn"%>
       <% end %>
     <% end %>
@@ -108,9 +104,7 @@
       後ろの商品 ＞
     </a>
   </div>
-  <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
   <a href="#" class="another-item"><%= @item.category.name %>をもっと見る</a>
-  <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
 <%= render "shared/footer" %>
