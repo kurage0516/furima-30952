@@ -1,5 +1,7 @@
 class PurchaseHistoriesController < ApplicationController
+  before_action :authenticate_user!, only: :index
   before_action :item_find, only: [:index, :create]
+  before_action :contributor_confirmation, only: :index
 
   def index
     @form_object = FormObject.new
@@ -35,5 +37,9 @@ class PurchaseHistoriesController < ApplicationController
       card: purchase_history_params[:token], # カードトークン
       currency: 'jpy'                 # 通貨の種類（日本円）
     )
+  end
+
+  def contributor_confirmation
+    redirect_to root_path if current_user == @item.user || @item.purchase_history.present?
   end
 end
