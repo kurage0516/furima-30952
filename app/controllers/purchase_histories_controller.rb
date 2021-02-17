@@ -1,7 +1,7 @@
 class PurchaseHistoriesController < ApplicationController
-  before_action :authenticate_user!, only: :index
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :item_find, only: [:index, :create]
-  before_action :contributor_confirmation, only: :index
+  before_action :contributor_confirmation, only: [:index, :create]
 
   def index
     @form_object = FormObject.new
