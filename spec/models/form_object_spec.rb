@@ -83,6 +83,12 @@ RSpec.describe FormObject, type: :model do
         @form_object.valid?
         expect(@form_object.errors.full_messages).to include("Item can't be blank")
       end
+
+      it '電話番号は英数混合では登録できない' do
+        @form_object.phone_number = '050318735aa'
+        @form_object.valid?
+        expect(@form_object.errors.full_messages).to include('Phone number is invalid')
+      end
     end
   end
 end
