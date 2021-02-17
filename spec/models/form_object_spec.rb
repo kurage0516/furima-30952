@@ -55,7 +55,7 @@ RSpec.describe FormObject, type: :model do
       end
 
       it '郵便番号の情報はハイフンがないと登録できない' do
-        @form_object.postal_code = 5_420_764
+        @form_object.postal_code = "5420764"
         @form_object.valid?
         expect(@form_object.errors.full_messages).to include('Postal code is invalid')
       end
