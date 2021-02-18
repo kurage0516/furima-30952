@@ -60,8 +60,14 @@ RSpec.describe FormObject, type: :model do
         expect(@form_object.errors.full_messages).to include('Postal code is invalid')
       end
 
-      it '電話番号はハイフンがあり、12桁以上だと登録できない' do
-        @form_object.phone_number = '0500-3187-3522'
+      it '電話番号はハイフンがあると登録できない' do
+        @form_object.phone_number = '050-3187-3522'
+        @form_object.valid?
+        expect(@form_object.errors.full_messages).to include('Phone number is invalid')
+      end
+
+      it '電話番号は12桁以上だと登録できない' do
+        @form_object.phone_number = '050031873522'
         @form_object.valid?
         expect(@form_object.errors.full_messages).to include('Phone number is invalid')
       end
