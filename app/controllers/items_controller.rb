@@ -55,6 +55,6 @@ class ItemsController < ApplicationController
   end
 
   def edit_cancel
-    redirect_to root_path @item.purchase_history.present?
+    redirect_to root_path if @item.purchase_history.present?
   end
 end
